@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Price to Weight Calculator</title>
+<style>
+body {
+  font-family: Arial;
+  background: #f3f6f4;
+  padding: 20px;
+}
+.container {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 400px;
+  margin: 40px auto;
+}
+h2 { color: #123b32; }
+label { display: block; margin-top: 20px; }
+input {
+  width: 100%;
+  padding: 13px;
+  margin-top: 8px;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+.result {
+  background: #e7f3ed;
+  padding: 20px;
+  margin-top: 25px;
+  border-radius: 15px;
+}
+#answer {
+  font-size: 32px;
+  font-weight: bold;
+  color: #123b32;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  background: #123b32;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Price to Weight Calculator</h2>
+
+<label>Product price per kg (₹)</label>
+<input type="number" id="rate" value="600">
+
+<label>Your budget (₹)</label>
+<input type="number" id="budget" value="20">
+
+<div class="result">
+<p>You will get:</p>
+<div id="answer">33.33 g</div>
+</div>
+
+<button onclick="resetCalc()">Reset</button>
+</div>
+
+<script>
+function calculate() {
+  let rate = Number(document.getElementById("rate").value);
+  let budget = Number(document.getElementById("budget").value);
+
+  if (rate <= 0 || budget < 0 ||
+      document.getElementById("rate").value === "" ||
+      document.getElementById("budget").value === "") {
+    document.getElementById("answer").innerHTML = "Enter valid values";
+    return;
+  }
+
+  let grams = (budget / rate) * 1000;
+
+  document.getElementById("answer").innerHTML =
+    grams.toFixed(2) + " g";
+}
+
+function resetCalc() {
+  document.getElementById("rate").value = 600;
+  document.getElementById("budget").value = 20;
+  calculate();
+}
+
+document.getElementById("rate").addEventListener("input", calculate);
+document.getElementById("budget").addEventListener("input", calculate);
+calculate();
+</script>
+
+</body>
+</html>
